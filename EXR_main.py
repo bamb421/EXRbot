@@ -23,7 +23,7 @@ app = Flask('')
 
 @app.route('/')
 def home():
-    return "Bot is alive!"
+    return "if ur seeing this then EXRbot is online!"
 
 def run_web():
     app.run(host="0.0.0.0", port=PORT)
@@ -164,6 +164,7 @@ async def on_message(message):
 
 
 client.run(discordTOKEN)
+
 
 
 
