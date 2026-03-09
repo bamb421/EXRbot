@@ -174,7 +174,7 @@ async def on_message(message):
     if message.author == client.user:
         return
     
-    if message.author.id == devId or message.author.id == guild.owner_id:
+    if message.author.id == devId or (guild and message.author.id == guild.owner_id):
         msg = message.content.lower()
 
         if msg == "!exrbot uptime":
@@ -222,3 +222,4 @@ async def on_message(message):
     #    await message.channel.send('Hello!')
 
 client.run(discordTOKEN)
+
