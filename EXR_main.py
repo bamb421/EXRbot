@@ -183,7 +183,7 @@ async def on_message(message):
             await message.channel.send(f"i have been up for: {uptime_str}")
             return
 
-        elif msg == "!exrbot xareOpinion":
+        if msg == "!exrbot xareOpinion":
             await message.channel.send("i hate him")
             return
     
@@ -222,4 +222,3 @@ async def on_message(message):
     #    await message.channel.send('Hello!')
 
 client.run(discordTOKEN)
-
