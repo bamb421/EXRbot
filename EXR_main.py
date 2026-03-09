@@ -1,5 +1,4 @@
-# this bot is designed to keep xare in check because he is A FAT ANNOYING NOOB
-# note: plz disable pings in your server and this wont prevent them, this is only to punish xare if he mass pings
+# this bot sucks dont use it
 
 import os
 import asyncio
@@ -112,8 +111,7 @@ async def timeout(guild, message):
                     fields=fields,
                     color=0xFF3333
                 )
-
-                #await message.channel.send(f"{message.author.mention} has been timed out for {timeoutLength} seconds!\nReason: {TimeoutReason}")
+                print(f"SENT {message.author} TO TIMEOUT FOR {timeoutLength}")
             except discord.Forbidden:
 
                 await send_embed(
@@ -123,8 +121,7 @@ async def timeout(guild, message):
                     description=f"I DONT HAVE PERMISSION TO TIMEOUT {message.author.mention}, plz make sure my role is high enough and that i have administrator privileges! <@{guild.owner_id}>",
                     color=0xFF3333
                 )
-            
-                #await message.channel.send(f"I DONT HAVE PERMISSION TO TIMEOUT {message.author.mention}, plz make sure my role is high enough and that i have administrator privileges! <@{guild.owner_id}>")
+                print(f"COULDNT TIMEOUT {message.author}")
             except Exception as e:
                 fields = [
                     ("duration", f"{timeoutLength} seconds", False),
@@ -139,6 +136,7 @@ async def timeout(guild, message):
                     fields=fields,
                     color=0xFF3333
                 )
+                print(f"ERROR: {e}")
             await message.delete()  
 async def warn(message):
             global chances
@@ -159,6 +157,7 @@ async def warn(message):
                 fields=fields,
                 color=0xFF5733
             )
+            print(f"WARNED {message.author}")
             await message.delete()  
 
 @client.event
@@ -169,20 +168,24 @@ async def on_message(message):
     global chances
     global aaaa
     global mineemum
-
+    
     guild = message.guild
 
     if message.author == client.user:
         return
     
+    if message.content.lower() == "!uptime" and (message.author.id == devId or message.author.id == guild.owner_id):
+        delta = datetime.datetime.now() - start_time
+        uptime_str = format_uptime(delta)
+
+        await message.channel.send(f"I have been up for: {uptime_str}")
+        return
+    
     if (len(message.mentions) > 0 or message.mention_everyone) and message.author.id in kidsToKeepInCheck:
-        #print(f"{message.author.id} and {kidToKeepInCheck}")
         asyncio.create_task(keeed())
 
-        if message.mention_everyone: # lololololololo
+        if message.mention_everyone:
             await timeout(guild, message)
-            
-        #print("pings:", totalPings)
 
         user_pings = re.findall(r"<@!?\d+>", message.content)
         role_pings = re.findall(r"<@&\d+>", message.content)
