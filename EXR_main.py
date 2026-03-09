@@ -183,7 +183,7 @@ async def on_message(message):
             await message.channel.send(f"i have been up for: {uptime_str}")
             return
 
-        if msg == "!exrbot xareOpinion":
+        if msg == "!exrbot xareopinion":
             await message.channel.send("i hate him")
             return
     
