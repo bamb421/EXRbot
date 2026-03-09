@@ -174,12 +174,18 @@ async def on_message(message):
     if message.author == client.user:
         return
     
-    if message.content.lower() == "!uptime" and (message.author.id == devId or message.author.id == guild.owner_id):
-        delta = datetime.datetime.now() - start_time
-        uptime_str = format_uptime(delta)
+    if message.author.id == devId or message.author.id == guild.owner_id:
+        msg = message.content.lower()
 
-        await message.channel.send(f"I have been up for: {uptime_str}")
-        return
+        if msg == "!exrbot uptime":
+            delta = datetime.datetime.now() - start_time
+            uptime_str = format_uptime(delta)
+            await message.channel.send(f"i have been up for: {uptime_str}")
+            return
+
+        elif msg == "!exrbot xareOpinion":
+            await message.channel.send("i hate him")
+            return
     
     if (len(message.mentions) > 0 or message.mention_everyone) and message.author.id in kidsToKeepInCheck:
         asyncio.create_task(keeed())
@@ -216,3 +222,4 @@ async def on_message(message):
     #    await message.channel.send('Hello!')
 
 client.run(discordTOKEN)
+
