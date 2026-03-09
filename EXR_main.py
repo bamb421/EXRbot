@@ -13,7 +13,7 @@ PORT = int(os.environ.get("PORT", 5000))  # port
 discordTOKEN = os.environ.get("DISCORD_TOKEN")
 timeoutLength = 300 # about an hour
 devId = int(os.environ.get("devId")) # accidentally put the wrong user id oops
-kidToKeepInCheck = int(os.environ.get("kidToKeepInCheck"))
+kidsToKeepInCheck = [1226345314194161726, 574701344775077899] #int(os.environ.get("kidToKeepInCheck"))
 timesThisKidHasPinged = 0 # explanatory
 pingMin = int(os.environ.get("pingMin")) # amount of pings that can happen before timeout
 chances = pingMin + 1 # yeah
@@ -62,7 +62,7 @@ async def on_message(message):
     if message.author == client.user:
         return
     
-    if (len(message.mentions) > 0 or message.mention_everyone) and message.author.id == kidToKeepInCheck:
+    if (len(message.mentions) > 0 or message.mention_everyone) and message.author.id in kidsToKeepInCheck:
         #print(f"{message.author.id} and {kidToKeepInCheck}")
 
         timesThisKidHasPinged += 1
@@ -164,6 +164,7 @@ async def on_message(message):
 
 
 client.run(discordTOKEN)
+
 
 
 
